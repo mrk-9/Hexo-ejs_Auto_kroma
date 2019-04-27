@@ -1,0 +1,20 @@
+# Header
+menu:
+  AfterCodecs: /AfterCodecs
+  BRAW Studio: /BRAW_Studio
+  Blog: /blog
+  Newsletter: '#'
+  twitter: https://twitter.com/Autokroma
+  facebook: https://www.facebook.com/Autokroma/
+rss: /atom.xml
+
+# Content
+excerpt_link: Read More
+
+# Miscellaneous
+google_analytics: UA-110078783-1
+favicon: /favicon.ico
+twitter:
+google_plus:
+fb_admins:
+fb_app_id:

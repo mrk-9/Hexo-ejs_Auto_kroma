@@ -1,0 +1,39 @@
+<header class="l-header js-header">
+  <div class="l-header__container l-container">
+    <h1 class="l-header__title">
+      <a class="l-header__home" href="<%- url_for() %>">
+        <%- partial('_partial/icon', {name: 'autokroma'}) %>
+        <%= config.title %>
+      </a>
+    </h1>
+    <nav class="l-header__nav">
+      <% for (var name in theme.menu){ %>
+        <% if ( name === 'twitter' || name === 'facebook') { %>
+          <a class="l-header__link l-header__link--network" href="<%- url_for(theme.menu[name]) %>" target="_blank">
+            <%- partial('_partial/icon', {name: name}) %>
+          </a>
+        <% } else if ( name === 'Newsletter' ) { %>
+          <div class="l-header__newsletter">
+            <button class="l-header__link" type="button"><%= name %></button>
+            <div class="l-header__dropdown">
+              <form class="c-newsletter" action="https://autokroma.us17.list-manage.com/subscribe/post?u=1da24c3edad543181b6cb75f8&amp;id=2dc25ae295" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+                <input class="c-newsletter__field" type="email" value="" name="EMAIL" id="mce-EMAIL" placeholder="email address" required>
+                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1da24c3edad543181b6cb75f8_2dc25ae295" tabindex="-1" value=""></div>
+                <button class="p-button p-button--small c-newsletter__button" type="submit" name="subscribe" id="mc-embedded-subscribe">Subscribe</button>
+
+              </form>
+            </div>
+          </div>
+
+        <% } else { %>
+          <a class="l-header__link <%- url_for(path).split('/')[1] === url_for(theme.menu[name]).split('/')[1] ? 'is-current' : '' %>" href="<%- url_for(theme.menu[name]) %>"><%= name %></a>
+        <% } %>
+      <% } %>
+    </nav>
+    <button class="l-header__mobile-button js-header-button" type="button">
+      <%- partial('_partial/icon', {name: 'menu', classes: 'l-header__menu-icon'}) %>
+      <%- partial('_partial/icon', {name: 'cross', classes: 'l-header__cross-icon'}) %>
+    </button>
+  </div>
+</header>

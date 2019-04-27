@@ -1,0 +1,59 @@
+<section class="l-container">
+  <%- page.content %>
+</section>
+
+<% site.pages.data.filter((productPage) => productPage.product && productPage.title === 'Description').sort((a, b) => a.order - b.order).forEach(function(productPage){ %>
+  <section class="c-project" id="banner_section" style="background-image: url('<%- productPage.hero.image %>');">
+    <div class="c-project__gradient" id="banner_gradient" style="background-image: linear-gradient(135deg, <%- productPage.hero.colors %>);"></div>
+    <div class="l-container" id="banner_container">
+
+
+      <h1 class="c-project__title"><a href="<%- url_for(productPage.path) %>"><%- productPage.product %></a></h1>
+
+      <p class="c-project__tagline">
+        <%- productPage.tagline %>
+        <br />
+        <% if( productPage.on_win ) { %>
+
+        <img class="aftercodecs-os" alt="Windows" src="<%- url_for('/images/win.png') %>" />
+        <%} if( productPage.on_mac) { %>
+         + <img class="aftercodecs-os" alt="OSX" src="<%- url_for('/images/mac.png') %>" />
+        <% } %>
+      </p>
+
+
+      <a class="p-button p-button--large p-button--inverse" href="<%- productPage.mainAction.url %>"><%- productPage.mainAction.label %></a>
+
+      <p class="c-project__details">
+        <a href="<%- url_for(productPage.path) %>">More details</a>
+      </p>
+
+      <!--
+      <img id="banner_logo" src="<%- url_for('/images/AfterCodecsLogo2_768.png') %>" height="190" /><br /><br />
+
+
+        Export 8K+ from Adobe CC to
+        <span class="special_banner_img">ProRes</span>
+        <span class="special_banner_img">HAP</span>
+        <span class="special_banner_img">H264</span>
+        <span class="special_banner_img">H265</span>
+        !
+
+      -->
+    </div>
+  </section>
+<% }) %>
+
+<section class="l-container">
+  <div class="c-content">
+    <h1 class="c-content__title">Latest blog posts</h1>
+  </div>
+  <div class="c-content">
+    <% site.posts.filter(post => !post.hidden).sort('date', -1).limit(3).each(function(post){ %>
+      <%- partial('_partial/excerpt', {post: post}) %>
+    <% }); %>
+  </div>
+  <div class="u-text-center">
+    <a href="/blog" class="p-button">See all blog posts</a>
+  </div>
+</section>

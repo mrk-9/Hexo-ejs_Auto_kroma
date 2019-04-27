@@ -1,0 +1,22 @@
+<article class="l-container" itemscope itemprop="blogPost">
+  <header class="c-content">
+    <h1 class="c-content__title" itemprop="name">
+      <%= post.title %>
+    </h1>
+    <div class="c-content__meta">
+      By <%= post.author %> • <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%= date(post.date, 'MMM Do YYYY') %></time>
+      <% if (post.tags && post.tags.length){ %>
+        <%- list_tags(post.tags, {
+          show_count: false,
+          class: 'c-tag'
+        }) %>
+      <% } %>
+    </div>
+  </header>
+  <% if ( post.poster ) { %>
+    <img class="c-content__poster" src="<%= post.poster %>" alt="<%= post.title %>">
+  <% } %>
+  <div itemprop="articleBody">
+    <%- partial('_partial/content', {post: post, index: false}) %>
+  </div>
+</article>

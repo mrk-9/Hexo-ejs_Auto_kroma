@@ -1,0 +1,16 @@
+<div class="l-container">
+  <footer class="l-footer">
+    <div class="l-footer__colum">
+      <p>&copy; <%= date(new Date(), 'YYYY') %> <%= config.title %> • <a href="/contact">Contact</a></p>
+
+    </div>
+    <div class="l-footer__colum">
+      <a class="l-footer__network" href="https://twitter.com/Autokroma" target="_blank">
+        <%- partial('_partial/icon', {name: 'twitter'}) %>
+      </a>
+      <a class="l-footer__network" href="https://www.facebook.com/Autokroma/" target="_blank">
+        <%- partial('_partial/icon', {name: 'facebook'}) %>
+      </a>
+    </div>
+  </footer>
+</div>

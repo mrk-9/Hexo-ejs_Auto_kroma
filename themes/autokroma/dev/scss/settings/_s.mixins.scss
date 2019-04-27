@@ -1,0 +1,70 @@
+@mixin media-query($from, $until: false) {
+  $from-index: index($layouts-name, $from);
+  $from-breakpoint: if($from-index, nth($layouts-break-point, $from-index), $from);
+
+  @if ($until) {
+    $until-index: index($layouts-name, $until);
+    $until-breakpoint: if($until-index, nth($layouts-break-point, $until-index), $until) - 1;
+
+    @if ($from-breakpoint == 0) {
+      @media only screen and (max-width: $until-breakpoint) {
+        @content;
+      }
+    } @else {
+      @media only screen and (min-width: $from-breakpoint) and (max-width: $until-breakpoint) {
+        @content;
+      }
+    }
+  } @else {
+    @if ($from-breakpoint == 0) {
+      @content;
+    } @else {
+      @media only screen and (min-width: $from-breakpoint) {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin responsive($arglist...) {
+  $last-results: $arglist;
+  $multiplier: 1;
+  @if ( type-of(nth($arglist, 1)) != 'list' ) {
+    $arglist: $arglist,;
+  }
+  @each $layout-name in $layouts-name {
+    @include media-query($layout-name) {
+      @each $args in $arglist {
+        $i: index($arglist, $args);
+        $property: nth($args, 1);
+        $value: nth($args, 2);
+        $multipliers: if( length($args) >= 3, nth($args, 3), 1 );
+        $adder: if( length($args) >= 4, nth($args, 4), 0 );
+        $string: if( length($args) >= 5, nth($args, 5), '' );
+        @if (type-of($value) != "map") {
+          $value: ( nth($layouts-name, 1): $value );
+        }
+        @if map-has-key($value, $layout-name) {
+          @if (type-of($multipliers) == "map") {
+            $multiplier: if( map-get($multipliers, $layout-name), map-get($multipliers, $layout-name), $multiplier );
+          } @else {
+            $multiplier: $multipliers;
+          }
+          $result: unquote(multiply-all(map-get($value, $layout-name), $multiplier, $adder) + $string);
+          @if ( $result != nth($last-results, $i) ) {
+            #{$property}: $result;
+          }
+          $last-results: set-nth($last-results, $i, $result);
+        }
+      }
+    }
+  }
+}
+
+@mixin font($font-name) {
+  $font-settings: map-get($fonts, $font-name);
+
+  @each $key, $value in $font-settings {
+    @include responsive($key, $value);
+  }
+}

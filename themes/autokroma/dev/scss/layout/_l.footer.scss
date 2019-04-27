@@ -1,0 +1,30 @@
+.l-footer {
+  border-top: 1px solid $color-neutral-2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  margin-top: 80px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.l-footer__colum {
+
+}
+
+.l-footer__network {
+  display: inline-block;
+  text-decoration: none;
+  transition: all .2s ease-out;
+
+  & + .l-header__link--network {
+    margin-left: 10px;
+  }
+
+  &:hover {
+    color: $color-secondary;
+  }
+}

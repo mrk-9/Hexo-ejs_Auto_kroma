@@ -1,0 +1,9 @@
+@each $font-name, $properties in $fonts {
+  .u-text-#{$font-name} {
+    @include font($font-name);
+  }
+}
+
+.u-text-center {
+  text-align: center;
+}

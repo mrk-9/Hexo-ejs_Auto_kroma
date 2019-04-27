@@ -1,0 +1,28 @@
+/*.p-link {
+  &.is-mac {
+    &::after {
+      content: ' for mac';
+    }
+  }
+
+  &.is-windows {
+    &::after {
+      content: ' for windows';
+    }
+  }
+
+  &.is-inverted {
+    &.is-mac {
+      &::after {
+        content: ' for windows';
+      }
+    }
+
+    &.is-windows {
+      &::after {
+        content: ' for mac';
+      }
+    }
+  }
+}
+*/

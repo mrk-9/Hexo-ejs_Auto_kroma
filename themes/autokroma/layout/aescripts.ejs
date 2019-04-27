@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="<%- config.url %>/css/style.min.css">
+
+<% var productPages = site.pages.data.filter((sitePage) => sitePage.product == page.for && sitePage.title == 'Description');
+for( var i = 0; i < productPages.length ; i++) {
+  productPage = productPages[i];
+ %>
+ 
+<div class="l-container">
+  <div class="p-video">
+    <iframe width="784" height="441" src="https://www.youtube.com/embed/<%- productPage.hero.video %>?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<%- partial('_partial/content', {post: page, index: false}) %>
+
+<div class="l-container">
+  <% site.pages.data.filter((feature) => feature.path.includes('/features/') && feature.path.includes(productPage.product)).sort((a, b) => a.order - b.order).forEach(function(feature, index){ %>
+    <div class="c-feature">
+      <div class="l-grid">
+        <div class="l-grid__item u-width-10_l u-offset-1_l">
+          <div class="l-grid l-grid--align-center">
+            <div class="l-grid__item u-width-8_m u-width-7_l <%- index % 2 == 0 ? 'l-grid__item--order-1_m' : '' %>">
+              <div class="c-feature__content">
+                <h2 class="c-feature__title"><%- feature.title %></h2>
+                <div class="c-feature__description">
+                  <%- feature.content %>
+                </div>
+              </div>
+            </div>
+            <div class="l-grid__item u-width-4_m u-width-5_l">
+              <div class="c-feature__image">
+                <img src="<%- config.url %>/<%- feature.image %>" alt="<%- feature.title %>">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+ <% } %>

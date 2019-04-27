@@ -1,0 +1,81 @@
+<div class="l-container">
+
+  <p>
+      One user license is for the same user on up to two operating systems.
+  </p>
+
+  <div class="p-table">
+    <table>
+      <thead>
+        <tr>
+          <th># of software hosts</th>
+          <th>Price for each single user license</th>
+          <th>Price for each floating license</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% var price = 89.0;
+          //var reducHostsTab = [1.0,0.9,0.85];
+          var reducHostsTab = [1.0,200.0/(3.0*price)];
+
+        for ( var i = 1 ; i <= reducHostsTab.length ; i++) {
+
+          var reducHosts = reducHostsTab[i-1];
+        %>
+
+          <tr>
+
+            <td><% if(i==1) { %>1 host among AE, PPro or AME <% } else { %>Full Adobe Suite <% } %> </td>
+
+            <% for ( var j = 1 ; j <= 2 ; j++) { 
+
+              Number.prototype.pad = function(size) {
+                  var s = String(this);
+                  while (s.length < (size || 2)) {s = "0" + s;}
+                  return s;
+              }
+
+              var reducUsers = [1.0,1.45][j-1];//[1.0,0.9,0.85,0.8][j-1];
+              if(j == 2)
+                reducHosts = 1.0;
+
+              //reducUsers = 0.75; // current discount limited in time
+              var reduc = reducHosts * reducUsers;
+              var newPrice = Math.floor( price * reduc );
+              var newPriceCents = Math.floor( price * reduc * 100.0 % 100.0 ).pad(2);
+              var reducPercent = Math.round(100.0 - reduc*100.0);
+
+            %>
+
+              <td><%- newPrice %><small>.<%- newPriceCents %></small>$
+                <% if(reducPercent > 0) { %>
+                  <span class="p-tag afc_discount">
+                  -<%- reducPercent %>%
+                  </span>
+                <% } %>
+                <% if(i == 2 && j == 1) { %>
+                   (200$ for the Suite)
+                <% } %>
+
+              </td>
+
+            <% }  %>
+
+          </tr>
+
+        <% }  %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="u-text-center">
+    <a href="https://aescripts.com/aftercodecs/" class="p-button" target="_blank">Buy AfterCodecs</a>
+  </div>
+  <!-- <div class="c-pricing">
+    <h2>How many licenses?</h2>
+    <input class="c-pricing__range" type="range" min="1" max="10" value="1">
+    <p><span class="c-pricing__license-number">1</span> licence(s)</p>
+    <h2>Price</h2>
+    <div class="c-pricing__price">100€</div>
+  </div> -->
+</div>

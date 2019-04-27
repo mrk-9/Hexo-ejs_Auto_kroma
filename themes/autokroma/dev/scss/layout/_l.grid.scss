@@ -1,0 +1,117 @@
+//  ========================================================================  //
+//  Grid base
+//  ========================================================================  //
+
+.l-grid {
+  display: block;
+	padding: 0;
+	margin: 0;
+  @include responsive('margin-left', $gutter-map, -1);
+  @include clearfix;
+}
+
+.l-grid__item {
+  display: block;
+  width: 100%;
+  float: left;
+  min-height: 1px;
+  @include responsive('padding-left', $gutter-map);
+}
+
+//  ========================================================================  //
+//  Grid clear
+//  ========================================================================  //
+
+@each $layout-name in $layouts-name {
+  @include media-query($layout-name) {
+    @each $col-number in $grid-items-clear {
+      .l-grid--clear-#{$col-number}_#{$layout-name} {
+        .l-grid__item:nth-child(n) {
+          clear: none;
+        }
+        .l-grid__item:nth-child#{'(' + $col-number + 'n + 1)'} {
+          clear: both;
+        }
+      }
+    }
+  }
+}
+
+//  ========================================================================  //
+//  Grid Flex
+//  ========================================================================  //
+
+@if $flex-grid {
+
+  // Base
+  .l-grid {
+    display: flex;
+    flex-wrap: wrap;
+
+    /**
+     * 1. Remove clearfix
+     *    that provide bug on safari
+     */
+    &:before,
+    &:after {
+      display: flex; /* 1 */
+    }
+  }
+
+  // Order
+  @for $layout from 1 through length($layouts-name) {
+    $layout-name: nth($layouts-name, $layout);
+
+    @each $order-number in $flex-grid-order {
+      $suffix: '';
+      $sign: '';
+
+      @if ( $layout > 1 ) {
+        $suffix: '_' + $layout-name;
+      }
+
+      @if ( $order-number < 0 ) {
+        $sign: 'minus';
+      }
+
+      @include media-query($layout-name) {
+        .l-grid__item--order-#{$sign}#{$order-number}#{$suffix} {
+          order: $order-number;
+        }
+      }
+    }
+  }
+
+  // Alignments
+  @each $alignment in $flex-grid-alignments {
+    .l-grid--align-#{$alignment} {
+      align-items: $alignment;
+    }
+  }
+
+  @each $alignment in $flex-grid-item-alignments {
+    .l-grid__item--align-#{$alignment} {
+      align-self: $alignment;
+    }
+  }
+
+}
+
+//  ========================================================================  //
+//  Grid spacing
+//  ========================================================================  //
+
+@each $ratio in $vertical-unit-variation {
+  $suffix: '-' + replace($ratio + '', '.', '') + 'x';
+  @if ($ratio == 1) {
+    $suffix: '';
+  }
+
+  .l-grid--gap#{$suffix} {
+    @include responsive('margin-top', $vertical-unit, $ratio * -1);
+
+    .l-grid__item {
+      @include responsive('margin-top', $vertical-unit, $ratio);
+    }
+  }
+}

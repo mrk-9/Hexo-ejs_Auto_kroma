@@ -1,0 +1,46 @@
+.c-feature {
+  padding-top: 70px;
+}
+
+.c-feature__content {
+
+}
+
+.c-feature__title {
+  font-size: 28px;
+  font-weight: $normal;
+  color: $color-secondary;
+}
+
+.c-feature__description {
+  font-size: 18px;
+
+  ul, ol {
+    padding-left: 30px;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      height: 6px;
+      width: 6px;
+      border-radius: 6px;
+      background: $color-neutral-2;
+      position: absolute;
+      left: -20px;
+      top: 14px;
+    }
+  }
+}
+
+.c-feature__image {
+  text-align: center;
+
+  img {
+    max-width: 400px;
+  }
+}

@@ -1,0 +1,19 @@
+<div class="l-container">
+  <div class="c-content">
+      <h1 class="c-content__title">Blog<% if ( page.tag ) {	%> about <%= page.tag	%><% } %></h1>
+  </div>
+  <div class="c-content">
+    <% page.posts.filter(post => !post.hidden).each(function(post){ %>
+      <%- partial('_partial/excerpt', {post: post}) %>
+    <% }); %>
+    <% if (page.total > 1){ %>
+      <nav class="c-pagination">
+        <% var prev_text = "&laquo; " + __('prev');var next_text = __('next') + " &raquo;"%>
+        <%- paginator({
+          prev_text: prev_text,
+          next_text: next_text
+        }) %>
+      </nav>
+    <% } %>
+  </div>
+</div>

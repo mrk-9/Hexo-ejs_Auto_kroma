@@ -1,0 +1,45 @@
+.c-project {
+  position: relative;
+  z-index: 1;
+  color: $color-neutral-3;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.c-project__gradient {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: $gradient-primary;
+  opacity: 0.9;
+  z-index: -1;
+}
+
+.c-project__title {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 400;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.c-project__tagline {
+  font-size: 22px;
+  max-width: 600px;
+  margin: 24px 0 50px;
+}
+
+.c-project__details {
+  margin: 6px 0 0;
+
+  a:hover {
+    color: rgba($color-neutral-3, 0.6);
+  }
+}

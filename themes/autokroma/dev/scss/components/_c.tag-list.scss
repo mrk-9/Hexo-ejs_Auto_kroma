@@ -1,0 +1,17 @@
+.c-tag-list {
+  @include list-reset;
+  margin-top: 5px;
+}
+
+.c-tag-list-item {
+  display: inline-block;
+
+  & + .c-tag-list-item {
+    margin-left: 5px;
+  }
+}
+
+.c-tag-list-link {
+  @extend .p-tag;
+  text-decoration: none;
+}

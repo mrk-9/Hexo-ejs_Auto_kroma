@@ -1,0 +1,28 @@
+@mixin clearfix() {
+  &:before,
+  &:after {
+      content: " ";
+      display: table;
+  }
+
+  &:after {
+      clear: both;
+  }
+}
+
+@mixin list-reset() {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+@mixin button-reset() {
+  font: inherit;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0;
+  color: inherit;
+  outline: 0;
+}

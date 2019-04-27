@@ -1,0 +1,7 @@
+<% if ( page.title === "Homepage" ) { %>
+  <%- partial('_page/home', {page: page}) %>
+<% } else if ( page.product ) { %>
+  <%- partial('_page/product', {page: page}) %>
+<% } else { %>
+  <%- partial('_partial/content', {post: page, index: false}) %>
+<% } %>

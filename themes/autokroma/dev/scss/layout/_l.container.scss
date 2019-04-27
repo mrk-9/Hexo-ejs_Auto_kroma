@@ -1,0 +1,9 @@
+.l-container {
+  display: block;
+  margin: 0 auto;
+  @include responsive(
+    ('max-width', lists-to-map($layouts-name, $layouts-container-max-width)),
+    ('padding-left', $gutter-map, $container-marge-ratio),
+    ('padding-right', $gutter-map, $container-marge-ratio)
+  );
+}

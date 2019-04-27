@@ -1,0 +1,37 @@
+@function multiply-all($values, $multiplier, $adder: 0) {
+  @for $n from 1 through length($values) {
+    @if type-of(nth($values, $n)) == 'number' {
+      $values: set-nth($values, $n, nth($values, $n) * $multiplier + $adder);
+    }
+  }
+  @return $values;
+}
+
+@function first($list) {
+  @return nth($list, 1);
+}
+
+@function last($list) {
+  @return nth($list, length($list));
+}
+
+@function lists-to-map($property-list, $value-list) {
+  $map: ();
+  @for $n from 1 through length($property-list) {
+    $map: map-merge(
+      $map,
+      (nth($property-list, $n): nth($value-list, $n))
+    );
+  }
+  @return $map;
+}
+
+@function replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}

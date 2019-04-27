@@ -1,0 +1,13 @@
+.c-newsletter {
+  display: flex;
+  align-items: center;
+}
+
+.c-newsletter__field {
+  border: 0;
+  padding: 5px;
+  outline: 0;
+  border-radius: 5px;
+  min-width: 250px;
+  flex-grow: 1;
+}

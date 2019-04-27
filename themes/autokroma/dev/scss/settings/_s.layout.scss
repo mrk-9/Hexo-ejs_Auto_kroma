@@ -1,0 +1,32 @@
+//  ========================================================================  //
+//  Grid System
+//  ========================================================================  //
+$layouts-name:                ( 'main',     's',        'm',        'l'        );
+$layouts-break-point:         ( 0,          500px,      800px,      1000px     );
+$layouts-columns-number:      ( 12,         12,         12,         12         );
+$layouts-column-gutter:       ( 24px,       36px,       48px,       60px       );
+$layouts-container-max-width: ( none,       none,       none,       1200px     );
+
+$container-marge-ratio: 0.5;
+$grid-items-clear: (2, 3, 4);
+$gutter-map: lists-to-map($layouts-name, $layouts-column-gutter);
+
+//  ========================================================================  //
+//  Spacing Units
+//  ========================================================================  //
+
+$horizontal-unit: lists-to-map($layouts-name, $layouts-column-gutter);
+$vertical-unit: $horizontal-unit;
+
+$vertical-unit-variation: (0.25, 0.5, 1, 2, 4);
+
+//  ========================================================================  //
+//  Flex Grid
+//  ========================================================================  //
+
+$flex-grid: true;
+
+// flex options
+$flex-grid-order: (1);
+$flex-grid-alignments: (center, baseline);
+$flex-grid-item-alignments: ();

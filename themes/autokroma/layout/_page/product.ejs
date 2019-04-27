@@ -1,0 +1,110 @@
+<% var productPages = site.pages.data.filter((sitePage) => sitePage.product == page.product && sitePage.title == 'Description');
+for( var i = 0; i < productPages.length ; i++) {
+  productPage = productPages[i];
+ %>
+
+<div class="c-hero js-hero" style="background-image: url('<%- productPage.hero.image %>');">
+  <div class="c-hero__gradient" style="background-image: linear-gradient(135deg, <%- productPage.hero.colors %>);"></div>
+  <div class="l-container">
+    <div class="c-hero__header">
+      <h2 class="c-hero__title js-hero-button"><%= page.product %></h2>
+      <nav class="c-hero__nav js-hero-menu">
+        <% site.pages.data.filter((sitePage) => sitePage.product == page.product).sort((a, b) => a.order - b.order).forEach(function(sitePage){ %>
+          <a class="c-hero__link <%- is_current(sitePage.path, true) ? 'is-current' : '' %>" href="<%- url_for(sitePage.path).split('index.html')[0] %>">
+            <%- sitePage.title %>
+          </a>
+        <% }) %>
+      </nav>
+      <button class="c-hero__mobile-button js-hero-button" type="button">
+        <%- partial('_partial/icon', {name: 'more', classes: 'p-icon--0-5x c-hero__more-icon'}) %>
+        <%- partial('_partial/icon', {name: 'cross', classes: 'p-icon--0-5x c-hero__cross-icon'}) %>
+      </button>
+    </div>
+    <% if ( page.tagline ) { %>
+      <p class="c-hero__tagline">
+        <%- productPage.tagline %>
+        <br />
+        <% if( productPage.on_win ) { %>
+
+        <img class="aftercodecs-os" alt="Windows" src="<%- url_for('/images/win.png') %>" />
+        <%} if( productPage.on_mac) { %>
+         + <img class="aftercodecs-os" alt="OSX" src="<%- url_for('/images/mac.png') %>" />
+        <% } %>
+      </p>
+    <% } %>
+
+
+
+    <% if ( page.hero && page.hero.actions ) { %>
+      <ul class="c-hero__actions">
+        <% page.hero.actions.forEach(function(action) { %>
+          <li class="c-hero__action">
+            <a class="p-button p-button--inverse p-button--large u-width-12 p-link js-os-detect" href="<%- action.url %>" if-windows="<%= action.Win %>" if-mac="<%= action.Mac %>"><%= action.label %>
+
+            <% if ( action.Win ) { %>
+              for <img class="aftercodecs-os invert" alt="Windows" src="<%- url_for('/images/win.png') %>" />
+            <% } else if ( action.Mac ) { %>
+              for <img class="aftercodecs-os invert" alt="OSX" src="<%- url_for('/images/mac.png') %>" />
+            <% } %>
+
+            </a>
+            <!-- Link for other OS -->
+            <% if ( (action.Win || action.Mac) && !page.hide_other_os ) { %>
+              <div class="c-hero__details">
+                <a class="p-link is-inverted js-os-detect" href="<%- action.url %>" if-windows="<%= action.Mac %>" if-mac="<%= action.Win %>">
+
+                <% if ( action.Win ) { %>
+                  Download for <img class="aftercodecs-os-little" alt="OSX" src="<%- url_for('/images/mac.png') %>" />
+                <% } else if ( action.Mac ) { %>
+                  Download for <img class="aftercodecs-os-little" alt="Windows" src="<%- url_for('/images/win.png') %>" />
+                <% } %>
+
+                </a>
+              </div>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+    <% if ( page.hero && page.hero.video ) { %>
+      <div class="c-hero__video">
+        <div class="p-video">
+          <iframe width="784" height="441" src="https://www.youtube.com/embed/<%- page.hero.video %>?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+<%- partial('_partial/content', {post: page, index: false}) %>
+<% if (page.pricing) { %>
+  <%- partial('_partial/pricing') %>
+<% } %>
+<% if ( page.title === "Description" ) { %>
+  <div class="l-container">
+    <% site.pages.data.filter((feature) => feature.path.includes('/features/') && feature.path.includes(page.source.split("/")[0])).sort((a, b) => a.order - b.order).forEach(function(feature, index){ %>
+      <div class="c-feature">
+        <div class="l-grid">
+          <div class="l-grid__item u-width-10_l u-offset-1_l">
+            <div class="l-grid l-grid--align-center">
+              <div class="l-grid__item u-width-8_m u-width-7_l <%- index % 2 == 0 ? 'l-grid__item--order-1_m' : '' %>">
+                <div class="c-feature__content">
+                  <h2 class="c-feature__title"><%- feature.title %></h2>
+                  <div class="c-feature__description">
+                    <%- feature.content %>
+                  </div>
+                </div>
+              </div>
+              <div class="l-grid__item u-width-4_m u-width-5_l">
+                <div class="c-feature__image">
+                  <img src="<%- feature.image %>" alt="<%- feature.title %>">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+<% } %>
+
+<% } %>

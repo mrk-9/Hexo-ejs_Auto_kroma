@@ -1,0 +1,65 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  height: 100%;
+  font-family: $core-font-family;
+  @include font($core-font-size);
+  color: $core-font-color;
+  font-weight: $core-font-weight;
+  @if ( $core-font-smoothing ) {
+    -webkit-font-smoothing: antialiased;
+	  -moz-osx-font-smoothing: grayscale;
+  }
+  background: $core-background;
+}
+
+b,
+strong {
+  font-weight: $bold;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $core-headings-font-family;
+  font-weight: $core-headings-font-weight;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+pre,
+code {
+  font-family: $core-code-font-family;
+  font-weight: $core-code-font-weight;
+  background: #f5f5f5;
+  color: $color-primary;
+  display: inline-block;
+  padding: 0 5px;
+  border-radius: 3px;
+}
+
+pre {
+  overflow: auto;
+}
+
+a {
+  color: $core-link-color;
+  text-decoration: $core-link-decoration;
+}
+
+button {
+  @include button-reset;
+}

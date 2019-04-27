@@ -1,0 +1,85 @@
+//  ========================================================================  //
+//  Grid size
+//  ========================================================================  //
+
+@for $layout from 1 through length($layouts-name) {
+  $layout-name: nth($layouts-name, $layout);
+  $columns-number: nth($layouts-columns-number, $layout);
+
+  @if ( $layout == 1 ) {
+
+    @for $col-number from 1 through $columns-number {
+      .u-width-#{$col-number} {
+        width: 100% / $columns-number * $col-number;
+      }
+    }
+
+  } @else {
+
+    @include media-query($layout-name) {
+
+      @for $col-number from 1 through $columns-number {
+        .u-width-#{$col-number}_#{$layout-name} {
+          width: 100% / $columns-number * $col-number;
+        }
+      }
+    }
+  }
+}
+
+//  ========================================================================  //
+//  Grid offset
+//  ========================================================================  //
+
+@for $layout from 1 through length($layouts-name) {
+  $layout-name: nth($layouts-name, $layout);
+  $columns-number: nth($layouts-columns-number, $layout);
+
+  @if ( $layout == 1 ) {
+
+    @for $col-number from 1 through $columns-number {
+      .u-offset-#{($col-number - 1)} {
+        margin-left: 100% / $columns-number * ($col-number - 1);
+      }
+    }
+
+  } @else {
+
+    @include media-query($layout-name) {
+      @for $col-number from 1 through $columns-number {
+        .u-offset-#{($col-number - 1)}_#{$layout-name} {
+          margin-left: 100% / $columns-number * ($col-number - 1);
+        }
+      }
+    }
+
+  }
+}
+
+//  ========================================================================  //
+//  Spacing
+//  ========================================================================  //
+
+@each $ratio in $vertical-unit-variation {
+  $suffix: '-' + replace($ratio + '', '.', '-') + 'x';
+  @if ($ratio == 1) {
+    $suffix: '';
+  }
+
+  .u-margin-top#{$suffix} {
+    @include responsive('margin-top', $vertical-unit, $ratio);
+  }
+
+  .u-margin-bottom#{$suffix} {
+    @include responsive('margin-bottom', $vertical-unit, $ratio);
+  }
+
+  .u-margin-y#{$suffix} {
+    @extend .u-margin-top#{$suffix};
+    @extend .u-margin-bottom#{$suffix};
+  }
+}
+
+.u-clearfix {
+  @include clearfix;
+}

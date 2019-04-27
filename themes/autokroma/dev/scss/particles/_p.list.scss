@@ -1,0 +1,11 @@
+.p-list-bare {
+  @include list-reset;
+}
+
+.p-list-inline {
+  @include list-reset;
+
+  li {
+    display: inline-block;
+  }
+}
